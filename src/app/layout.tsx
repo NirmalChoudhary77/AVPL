@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+// @vercel/analytics/next integration - verified build: 23:01:40
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 

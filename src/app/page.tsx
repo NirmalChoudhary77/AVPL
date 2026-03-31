@@ -48,7 +48,7 @@ function useScrollReveal() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.unobserve(entry.target); } },
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px 100px 0px' }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -114,7 +114,7 @@ const MOCK_DATA = {
 export default function AVMCPage() {
   const [labModules, setLabModules] = useState(MOCK_DATA.modules);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPass, setLoginPass] = useState('');
@@ -256,7 +256,7 @@ export default function AVMCPage() {
   }, []);
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-500 ${darkMode ? 'bg-[#0a0e1a] text-slate-200 selection:bg-blue-900' : 'bg-[#f4f6f8] text-slate-800 selection:bg-blue-200'}`}>
+    <div className={`min-h-screen font-sans transition-colors duration-300 ${darkMode ? 'bg-[#0a0e1a] text-slate-200 selection:bg-blue-900' : 'bg-[#f4f6f8] text-slate-800 selection:bg-blue-200'}`}>
       <style dangerouslySetInnerHTML={{__html: `
         ${fontImport}
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -271,7 +271,7 @@ export default function AVMCPage() {
       
 
       {/* Two-Tier Navigation - MIT Authoritative Style */}
-      <nav className={`sticky top-0 z-50 shadow-md transition-colors duration-500 ${darkMode ? 'bg-[#0f1629]' : 'bg-white'}`}>
+      <nav className={`sticky top-0 z-50 shadow-md transition-colors duration-300 ${darkMode ? 'bg-[#0f1629]' : 'bg-white'}`}>
         {/* Top Utility Tier */}
         <div className={`${darkMode ? 'bg-[#1a2236] text-slate-400' : 'bg-[#f8fafc] text-slate-500'} border-b ${darkMode ? 'border-slate-700/50' : 'border-slate-200'} py-2.5 px-6 lg:px-12`}>
           <div className="max-w-7xl mx-auto flex justify-between items-center text-[10px] uppercase font-bold tracking-[0.15em]">
@@ -621,8 +621,8 @@ export default function AVMCPage() {
       {isLoggedIn ? (
         <header className="relative pt-8 pb-24 overflow-hidden">
           <div className="absolute inset-0 bg-[#1d0a42]">
-              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#818cf8 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
-              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#f4f6f8] to-transparent"></div>
+            <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(#818cf8 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#f4f6f8] to-transparent"></div>
           </div>
           
           <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 text-white">
@@ -678,8 +678,8 @@ export default function AVMCPage() {
         </header>
       ) : (
         <header className="relative pt-16 pb-20 overflow-hidden bg-[#1d0a42]">
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#818cf8 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
-          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#f4f6f8] to-transparent"></div>
+          <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(#818cf8 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#f4f6f8] to-transparent"></div>
           <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 flex flex-col lg:flex-row items-center gap-16">
             <div className="flex-1 space-y-8 text-white">
               <div>
@@ -734,7 +734,7 @@ export default function AVMCPage() {
                   </p>
                 </div>
               </div>
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#01257d] rounded-full blur-3xl opacity-50"></div>
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#01257d] rounded-full blur-3xl opacity-20"></div>
             </div>
           </div>
         </header>
@@ -850,7 +850,7 @@ export default function AVMCPage() {
                 </div>
                 
                 {/* Module Content */}
-                <div className="p-8 pt-6 relative z-10 bg-[#001755]/40 backdrop-blur-sm">
+                <div className="p-8 pt-6 relative z-10 bg-[#001755]/40 backdrop-blur-[2px]">
                   {/* Videos Section */}
                   <div className="mb-10">
                     <h4 className="text-[11px] font-black text-white/50 uppercase tracking-widest mb-5 flex items-center justify-between">
@@ -957,8 +957,8 @@ export default function AVMCPage() {
         <div ref={sidebarReveal.ref} className={`scroll-reveal ${sidebarReveal.isVisible ? 'visible' : ''} lg:col-span-4 space-y-8`}>
 
           {/* Need Assistance? Widget */}
-          <div className="group/help bg-[#1d0a42] border-2 border-transparent hover:border-[#01257d]/30 transition-colors p-8 text-white shadow-xl shadow-[#1d0a42]/10 relative overflow-hidden rounded-3xl opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: '0.3s' }}>
-             <div className="absolute top-0 right-0 w-40 h-40 bg-[#01257d] opacity-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="group/help bg-[#1d0a42] border-2 border-transparent hover:border-[#01257d]/30 transition-colors p-8 text-white shadow-xl shadow-[#1d0a42]/10 relative overflow-hidden rounded-3xl">
+             <div className="absolute top-0 right-0 w-40 h-40 bg-[#01257d] opacity-20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
              
              <a href="#" className="inline-flex items-start gap-2 mb-6 group/helpTitle text-white hover:text-[#e0f2fe] transition-colors">
                <h3 className="font-sans font-bold text-3xl leading-tight">
